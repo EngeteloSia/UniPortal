@@ -28,25 +28,32 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-    'name' => 'required|string|max:255',
-    'email' => 'required|string|email|max:255|unique:users',
-    'password' => 'required|string|confirmed|min:8',
-    'role' => ['required', Rule::in(['student', 'lecturer', 'admin'])],
-]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|confirmed|min:8',
+        'role' => ['required', Rule::in(['student', 'lecturer', 'admin'])],
+    ]);
 
-$user = User::create([
-    'name' => $request->name,
-    'email' => $request->email,
-    'password' => Hash::make($request->password),
-    'role' => $request->role,
-]);
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'role' => $request->role,
+    ]);
 
-        event(new Registered($user));
+    event(new Registered($user));
+    Auth::login($user);
 
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+    // Redirect by role
+    if ($user->role === 'student') {
+        return redirect()->route('student.dashboard');
+    } elseif ($user->role === 'lecturer') {
+        return redirect()->route('lecturer.dashboard');
+    } else {
+        return redirect()->route('dashboard');
     }
+}
+
 }

@@ -1,77 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Register | Dynamic Laravel App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="index.css">
-</head>
-<body>
+<x-guest-layout>
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <img src="https://via.placeholder.com/100x40?text=Logo" alt="App Logo">
-      <h1 style="font-size: 18px;">Dynamic Laravel App</h1>
-    </div>
-    <div class="kebab" onclick="togglePanel()">⋮</div>
-  </header>
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
 
-  <!-- Side Panel -->
-  <div class="side-panel" id="sidePanel">
-    <div class="close-btn" onclick="togglePanel()">×</div>
-    <h3>Quick Menu</h3>
-    <a href="#">Home</a>
-    <a href="#">Contact</a>
-    <a href="#">About Project</a>
-  </div>
+        <!-- Name -->
+        <div>
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
 
-  <!-- Register Box -->
-  <div class="login-wrapper">
-    <h2>Create an Account</h2>
-    <form>
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" required placeholder="Enter your full name">
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" required placeholder="Enter your email">
-      </div>
-      <div class="form-group">
-        <label>Card Number</label>
-        <input type="text" required placeholder="Enter your Card Number">
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" required placeholder="Create a password">
-      </div>
-      <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="password" required placeholder="Confirm your password">
-      </div>
-      <button type="submit" class="login-btn">Register</button>
+        <!-- Email Address -->
+        <div class="mt-4">
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" />
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mt-4">
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                {{ __('Already registered?') }}
+            </a>
+
+            <x-primary-button class="ml-4">
+                {{ __('Register') }}
+            </x-primary-button>
+        </div>
+
+
+<div class="mt-4">
+    <x-input-label for="role" :value="__('Role')" />
+    <select id="role" name="role" class="block mt-1 w-full" required>
+        <option value="" disabled selected>Select your role</option>
+        <option value="student" {{ old('role') == 'student' ? 'selected' : '' }}>Student</option>
+        <option value="lecturer" {{ old('role') == 'lecturer' ? 'selected' : '' }}>Lecturer</option>
+        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+    </select>
+    <x-input-error :messages="$errors->get('role')" class="mt-2" />
+</div>
+
+
+
+
     </form>
-    <div class="footer-note">
-      Already have an account? <a href="index.html">Login</a>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Dynamic Laravel App. Developed by Group XYZ.</p>
-    <p>
-      <a href="#">Privacy Policy</a> |
-      <a href="#">Terms of Service</a>
-    </p>
-  </footer>
-
-  <!-- JS -->
-  <script>
-    function togglePanel() {
-      document.getElementById('sidePanel').classList.toggle('active');
-    }
-  </script>
-
-</body>
-</html>
+</x-guest-layout>
