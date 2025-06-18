@@ -31,7 +31,7 @@
 
             <!-- Main Content -->
             <main style="grid-column: span 3 / span 3; background-color: white; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">Welcome, Lecturer!</h1>
+                <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">Welcome, {{ Auth::user()->name }}!</h1>
                 <p style="color: #4b5563; margin-bottom: 1.5rem;">Manage your courses and student records efficiently.</p>
 
                 <!-- Dashboard -->
