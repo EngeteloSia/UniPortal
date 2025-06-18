@@ -35,5 +35,9 @@ Route::middleware(['auth', 'role:lecturer'])->group(function () {
     Route::get('/lecturer/dashboard', [LecturerDashboardController::class, 'index'])
         ->name('lecturer.dashboard');
 });
+Route::middleware(['auth', 'role:student'])->group(function () {
+    Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])
+        ->name('student.dashboard');
+});
 
 require __DIR__.'/auth.php';
