@@ -8,7 +8,7 @@
     <div style="font-family: sans-serif; margin: 0; padding: 0; background: #f3f4f6;">
         <header style="background-color: #1d4ed8; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
             <div style="font-size: 1.5rem; font-weight: bold;">📘 Student Portal</div>
-            <div>Logged in as: Student</div>
+            <div>Logged in as: {{ Auth::user()->name }}</div>
         </header>
 
         <div style="display: flex; padding: 1rem;">
@@ -24,7 +24,7 @@
             </aside>
 
             <main style="flex: 1; padding: 1rem; background: white; margin-left: 1rem; border-radius: 0.5rem; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
-                <h1 style="font-size: 1.5rem; font-weight: bold;">Welcome, Student!</h1>
+                <h1 style="font-size: 1.5rem; font-weight: bold;">Welcome, {{ Auth::user()->name }}</h1>
                 <p style="color: #4b5563;">Here are your enrolled courses and academic status.</p>
 
                 <!-- Dashboard Cards -->
