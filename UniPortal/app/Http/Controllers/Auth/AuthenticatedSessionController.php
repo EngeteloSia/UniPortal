@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+
 /** @var \App\Models\User $user */
 
 
@@ -29,16 +30,16 @@ class AuthenticatedSessionController extends Controller
 {
     $request->authenticate();
     $request->session()->regenerate();
-
-    $user = auth()->user();
+    /** @var \App\Models\User|null $user */
+    $user = Auth::user();
 
     if ($user->role === 'student') {
-        return redirect()->route('student.dashboard');
-    } elseif ($user->role === 'lecturer') {
-        return redirect()->route('lecturer.dashboard');
-    } else {
-        return redirect('/'); // admin or fallback
-    }
+    return redirect()->route('dashboard');
+} elseif ($user->role === 'lecturer') {
+    return redirect()->route('dashboard');
+} else {
+    return redirect()->route('dashboard'); // Redirect to default dashboard route
+}
 }
 
     /**

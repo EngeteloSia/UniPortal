@@ -9,12 +9,17 @@ use App\Http\Middleware\RoleMiddleware;
 class RouteServiceProvider extends ServiceProvider
 {
     public function boot(): void
-    {
-        // ✅ Register custom middleware alias
-        Route::aliasMiddleware('role', RoleMiddleware::class);
+{
+    Route::aliasMiddleware('role', RoleMiddleware::class);
 
-        // Optional: existing route groups
+    $this->routes(function () {
         Route::middleware('web')
             ->group(base_path('routes/web.php'));
-    }
+
+        Route::middleware('api')
+            ->prefix('api')
+            ->group(base_path('routes/api.php'));
+    });
+}
+
 }
