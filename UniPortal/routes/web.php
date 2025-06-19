@@ -32,6 +32,26 @@ Route::middleware(['auth', 'role:lecturer'])->group(function () {
     Route::get('/lecturer/dashboard', [LecturerDashboardController::class, 'index'])->name('lecturer.dashboard');
 });
 
+Route::middleware(['auth', 'role:lecturer'])->group(function () {
+    Route::get('/lecturer/students', [App\Http\Controllers\LecturerController::class, 'students'])->name('lecturer.students');
+    Route::post('/lecturer/enroll', [App\Http\Controllers\LecturerController::class, 'enroll'])->name('lecturer.enroll');
+});
+
+use App\Http\Controllers\LecturerController;
+
+
+// Lecturer dashboard + course management
+Route::middleware(['auth', 'role:lecturer'])->group(function () {
+    Route::get('/lecturer/dashboard', [LecturerDashboardController::class, 'index'])->name('lecturer.dashboard');
+    Route::get('/lecturer/students', [LecturerController::class, 'students'])->name('lecturer.students');
+    Route::post('/lecturer/enroll', [LecturerController::class, 'enroll'])->name('lecturer.enroll');
+});
+use App\Http\Controllers\LecturerCourseController;
+
+Route::middleware(['auth', 'role:lecturer'])->group(function () {
+    Route::post('/lecturer/courses', [LecturerCourseController::class, 'store'])->name('lecturer.courses.store');
+});
+
 use App\Http\Controllers\EnrollmentController;
 
 Route::post('/enroll', [EnrollmentController::class, 'enroll'])->name('enroll');

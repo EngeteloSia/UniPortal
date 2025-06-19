@@ -8,34 +8,37 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Create 2 lecturers
-        User::create([
-            'name' => 'Dr. Alice',
-            'email' => 'alice@uni.test',
-            'password' => Hash::make('password'),
-            'role' => 'lecturer',
-        ]);
-
-        User::create([
-            'name' => 'Dr. Bob',
-            'email' => 'bob@uni.test',
-            'password' => Hash::make('password'),
-            'role' => 'lecturer',
-        ]);
-
-        // Create 5 students
-        for ($i = 1; $i <= 5; $i++) {
-            User::create([
-                'name' => 'Student ' . $i,
-                'email' => 'student' . $i . '@uni.test',
+        // Create or update 2 lecturers
+        User::updateOrCreate(
+            ['email' => 'alice@uni.test'],
+            [
+                'name' => 'Dr. Alice',
                 'password' => Hash::make('password'),
-                'role' => 'student',
-            ]);
+                'role' => 'lecturer',
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'bob@uni.test'],
+            [
+                'name' => 'Dr. Bob',
+                'password' => Hash::make('password'),
+                'role' => 'lecturer',
+            ]
+        );
+
+        // Create or update 5 students
+        for ($i = 1; $i <= 5; $i++) {
+            User::updateOrCreate(
+                ['email' => "student{$i}@uni.test"],
+                [
+                    'name' => "Student {$i}",
+                    'password' => Hash::make('password'),
+                    'role' => 'student',
+                ]
+            );
         }
     }
 }
