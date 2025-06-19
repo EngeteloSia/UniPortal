@@ -13,8 +13,8 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if ($user->role === 'student') {
-            // Fetch courses the student is enrolled in
-            $courses = $user->enrolledCourses()->get();
+            // Fetch courses the student is enrolled in, with modules
+            $courses = $user->enrolledCourses()->with('modules')->get();
 
             return view('dashboards.student', compact('courses'));
         } elseif ($user->role === 'lecturer') {

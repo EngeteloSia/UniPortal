@@ -1,4 +1,3 @@
-<!-- resources/views/student/dashboard.blade.php -->
 <x-app-layout>
     <x-slot name="header">
         <h2 style="font-weight: 600; font-size: 1.25rem; color: #1f2937; line-height: 1.5;">
@@ -32,23 +31,42 @@
                 <div class="cards-section" id="dashboard-cards" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
                     <div style="background: #e0f2fe; padding: 1rem; border-radius: 0.5rem; flex: 1 1 200px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Total Courses</h3>
-                        <p>5</p>
+                        <p>{{ $courses->count() }}</p>
                     </div>
                     <div style="background: #e0f2fe; padding: 1rem; border-radius: 0.5rem; flex: 1 1 200px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Average Grade</h3>
-                        <p>75%</p>
+                        <p>75%</p> <!-- Replace with dynamic data if available -->
                     </div>
                     <div style="background: #e0f2fe; padding: 1rem; border-radius: 0.5rem; flex: 1 1 200px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Upcoming Exams</h3>
-                        <p>2</p>
+                        <p>2</p> <!-- Replace with dynamic data if available -->
                     </div>
                 </div>
 
                 <!-- My Courses -->
-                <div class="cards-section" id="courses-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+                <div class="cards-section" id="courses-cards" style="display: none; flex-direction: column; gap: 1rem; margin-top: 1rem;">
                     <div style="background: #fff3cd; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Current Courses</h3>
-                        <p>Math, Science, English, History, Art</p>
+                        @if ($courses->isEmpty())
+                            <p>No courses enrolled.</p>
+                        @else
+                            <ul style="margin: 0; padding-left: 1.5rem;">
+                                @foreach ($courses as $course)
+                                    <li>
+                                        <strong>{{ $course->title }}</strong><br>
+                                        <small style="color: #4b5563;">{{ $course->description }}</small>
+
+                                        @if ($course->modules && $course->modules->count())
+                                            <ul style="padding-left: 1rem; margin-top: 0.5rem;">
+                                                @foreach ($course->modules as $module)
+                                                    <li>{{ $module->title }} - <small>{{ $module->description }}</small></li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 </div>
 
@@ -58,25 +76,18 @@
                         <h3 style="margin-top: 0; font-weight: bold;">Math</h3>
                         <p>80%</p>
                     </div>
-                    <div style="background: #fef9c3; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
-                        <h3 style="margin-top: 0; font-weight: bold;">Science</h3>
-                        <p>70%</p>
-                    </div>
-                    <div style="background: #fef9c3; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
-                        <h3 style="margin-top: 0; font-weight: bold;">English</h3>
-                        <p>75%</p>
-                    </div>
+                    <!-- Add real grade data as needed -->
                 </div>
 
                 <!-- Profile -->
                 <div class="cards-section" id="profile-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
                     <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Name</h3>
-                        <p>Student Name</p>
+                        <p>{{ Auth::user()->name }}</p>
                     </div>
                     <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Email</h3>
-                        <p>student@email.com</p>
+                        <p>{{ Auth::user()->email }}</p>
                     </div>
                 </div>
             </main>
