@@ -4,6 +4,7 @@
             .cards-section {
                 display: none;
             }
+
             .cards-section.active {
                 display: block;
             }
@@ -39,63 +40,75 @@
                     <div style="display: grid; gap: 1rem;" class="md:grid-cols-3">
                         <div style="background-color: #d1fae5; padding: 1rem; border-radius: 0.5rem;">
                             <h3 style="font-weight: 600;">Courses Taught</h3>
-                            <p>3</p>
+                            <p>{{ $courses->count() }}</p>
                         </div>
                         <div style="background-color: #d1fae5; padding: 1rem; border-radius: 0.5rem;">
                             <h3 style="font-weight: 600;">Students Enrolled</h3>
-                            <p>120</p>
+                            <p>{{ $courses->flatMap->students->unique('id')->count() }}</p>
                         </div>
                         <div style="background-color: #d1fae5; padding: 1rem; border-radius: 0.5rem;">
                             <h3 style="font-weight: 600;">Pending Assignments</h3>
-                            <p>8</p>
+                            <p>0</p> <!-- Optional: Hook into assignment logic -->
                         </div>
                     </div>
                 </div>
 
                 <!-- Manage Courses -->
                 <div class="cards-section" id="courses-cards" style="display: none;">
-                    <div style="display: grid; gap: 1rem;" class="md:grid-cols-2">
-                        <div style="background-color: #fef9c3; padding: 1rem; border-radius: 0.5rem;">
-                            <h3 style="font-weight: 600;">Active Courses</h3>
-                            <p>2</p>
-                        </div>
-                        <div style="background-color: #fef9c3; padding: 1rem; border-radius: 0.5rem;">
-                            <h3 style="font-weight: 600;">Archived Courses</h3>
-                            <p>1</p>
-                        </div>
+                    @forelse ($courses as $course)
+                    <div style="background-color: #fef9c3; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                        <h3 style="font-weight: bold;">{{ $course->title }}</h3>
+                        <p>{{ $course->description }}</p>
+                        <p><strong>Enrolled:</strong> {{ $course->students->count() }} student(s)</p>
                     </div>
+                    @empty
+                    <p>No courses assigned yet.</p>
+                    @endforelse
                 </div>
 
                 <!-- Enrolled Students -->
                 <div class="cards-section" id="students-cards" style="display: none;">
-                    <div style="display: grid; gap: 1rem;" class="md:grid-cols-2">
-                        <div style="background-color: #bfdbfe; padding: 1rem; border-radius: 0.5rem;">
-                            <h3 style="font-weight: 600;">Total Students</h3>
-                            <p>120</p>
-                        </div>
-                        <div style="background-color: #bfdbfe; padding: 1rem; border-radius: 0.5rem;">
-                            <h3 style="font-weight: 600;">Top Performer</h3>
-                            <p>Jane Doe</p>
-                        </div>
+                    <div class="bg-blue-100 p-4 rounded mb-4">
+                        <h3 class="font-semibold">Total Students</h3>
+                        <p>{{ $courses->flatMap->students->unique('id')->count() }}</p>
+                    </div>
+
+                    <div class="bg-blue-100 p-4 rounded">
+                        <h3 class="font-semibold">Student List</h3>
+                        <ul class="list-disc pl-5 text-sm text-gray-700">
+                            @foreach ($courses->flatMap->students->unique('id') as $student)
+                            <li>{{ $student->name }} ({{ $student->email }})</li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Profile -->
                 <div class="cards-section" id="profile-cards" style="display: none;">
-                    <div style="display: grid; gap: 1rem;" class="md:grid-cols-2">
-                        <div style="background-color: #e9d5ff; padding: 1rem; border-radius: 0.5rem;">
-                            <h3 style="font-weight: 600;">Name</h3>
-                            <p>Lecturer Name</p>
-                        </div>
-                        <div style="background-color: #e9d5ff; padding: 1rem; border-radius: 0.5rem;">
-                            <h3 style="font-weight: 600;">Email</h3>
-                            <p>lecturer@email.com</p>
-                        </div>
+                    <div style="background-color: #e9d5ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                        <h3 style="font-weight: 600;">Name</h3>
+                        <p>{{ Auth::user()->name }}</p>
+                    </div>
+                    <div style="background-color: #e9d5ff; padding: 1rem; border-radius: 0.5rem;">
+                        <h3 style="font-weight: 600;">Email</h3>
+                        <p>{{ Auth::user()->email }}</p>
                     </div>
                 </div>
             </main>
         </div>
     </div>
+
+    <form action="{{ route('enroll') }}" method="POST">
+        @csrf
+        <label for="student_id">Select Student:</label>
+        <select name="student_id" required>
+            @foreach ($students as $student)
+            <option value="{{ $student->id }}">{{ $student->name }} ({{ $student->email }})</option>
+            @endforeach
+        </select>
+
+    </form>
+
 
     <script>
         const links = {
@@ -106,7 +119,7 @@
         };
 
         Object.keys(links).forEach(linkId => {
-            document.getElementById(linkId).addEventListener('click', function (e) {
+            document.getElementById(linkId).addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelectorAll('.cards-section').forEach(section => {
                     section.style.display = 'none';
