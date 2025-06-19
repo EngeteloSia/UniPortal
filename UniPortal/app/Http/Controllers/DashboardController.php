@@ -11,8 +11,9 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-
-        if ($user->role === 'student') {
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->role === 'student') {
             // Fetch courses the student is enrolled in, with modules
             $courses = $user->enrolledCourses()->with('modules')->get();
 
