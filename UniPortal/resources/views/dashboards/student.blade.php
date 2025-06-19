@@ -1,3 +1,4 @@
+<!-- resources/views/student/dashboard.blade.php -->
 <x-app-layout>
     <x-slot name="header">
         <h2 style="font-weight: 600; font-size: 1.25rem; color: #1f2937; line-height: 1.5;">
