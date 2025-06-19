@@ -1,11 +1,16 @@
 <?php
 
-use App\Http\Controllers\LecturerDashboardController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StudentDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentDashboardController;
+use App\Http\Controllers\LecturerDashboardController;
+use App\Http\Controllers\LecturerController;
+use App\Http\Controllers\LecturerCourseController;
+use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminCourseController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,7 +42,7 @@ Route::middleware(['auth', 'role:lecturer'])->group(function () {
     Route::post('/lecturer/enroll', [App\Http\Controllers\LecturerController::class, 'enroll'])->name('lecturer.enroll');
 });
 
-use App\Http\Controllers\LecturerController;
+
 
 
 // Lecturer dashboard + course management
@@ -46,15 +51,22 @@ Route::middleware(['auth', 'role:lecturer'])->group(function () {
     Route::get('/lecturer/students', [LecturerController::class, 'students'])->name('lecturer.students');
     Route::post('/lecturer/enroll', [LecturerController::class, 'enroll'])->name('lecturer.enroll');
 });
-use App\Http\Controllers\LecturerCourseController;
+
 
 Route::middleware(['auth', 'role:lecturer'])->group(function () {
     Route::post('/lecturer/courses', [LecturerCourseController::class, 'store'])->name('lecturer.courses.store');
 });
 
-use App\Http\Controllers\EnrollmentController;
+
 
 Route::post('/enroll', [EnrollmentController::class, 'enroll'])->name('enroll');
+
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::resource('/admin/users', AdminUserController::class);
+    Route::resource('/admin/courses', AdminCourseController::class);
+});
 
 
 require __DIR__.'/auth.php';
