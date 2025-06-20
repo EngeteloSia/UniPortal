@@ -62,12 +62,11 @@ Route::middleware(['auth', 'role:lecturer'])->group(function () {
 Route::post('/enroll', [EnrollmentController::class, 'enroll'])->name('enroll');
 
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::resource('/admin/users', AdminUserController::class);
-    Route::resource('/admin/courses', AdminCourseController::class);
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/users', AdminUserController::class);
+    Route::resource('/courses', AdminCourseController::class);
 });
-
 
 require __DIR__.'/auth.php';
 
