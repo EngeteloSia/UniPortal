@@ -48,50 +48,57 @@
                     <div style="background: #fff3cd; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Current Courses</h3>
                         @if ($courses->isEmpty())
-                            <p>No courses enrolled.</p>
+                        <p>No courses enrolled.</p>
                         @else
-                            <ul style="margin: 0; padding-left: 1.5rem;">
-                                @foreach ($courses as $course)
-                                    <li>
-                                        <strong>{{ $course->title }}</strong><br>
-                                        <small style="color: #4b5563;">{{ $course->description }}</small>
+                        <ul style="margin: 0; padding-left: 1.5rem;">
+                            @foreach ($courses as $course)
+                            <li>
+                                <strong>{{ $course->title }}</strong><br>
+                                <small style="color: #4b5563;">{{ $course->description }}</small>
 
-                                        @if ($course->modules && $course->modules->count())
-                                            <ul style="padding-left: 1rem; margin-top: 0.5rem;">
-                                                @foreach ($course->modules as $module)
-                                                    <li>{{ $module->title }} - <small>{{ $module->description }}</small></li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
+                                @if ($course->modules && $course->modules->count())
+                                <ul style="padding-left: 1rem; margin-top: 0.5rem;">
+                                    @foreach ($course->modules as $module)
+                                    <li>{{ $module->title }} - <small>{{ $module->description }}</small></li>
+                                    @endforeach
+                                </ul>
+                                @endif
+                            </li>
+                            @endforeach
+                        </ul>
                         @endif
                     </div>
                 </div>
 
                 <!-- Grades -->
                 <div class="cards-section" id="grades-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
-                    <div style="background: #fef9c3; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
-                        <h3 style="margin-top: 0; font-weight: bold;">Math</h3>
-                        <p>80%</p>
+                    @forelse ($marks as $mark)
+                    <div style="background: #fef9c3; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1); flex: 1 1 200px;">
+                        <h3 style="margin-top: 0; font-weight: bold;">{{ $mark->course->title }}</h3>
+                        <p>{{ $mark->score }}%</p>
                     </div>
-                    <!-- Add real grade data as needed -->
+                    @empty
+                    <p class="text-gray-500">No grades available yet.</p>
+                    @endforelse
                 </div>
 
-                <!-- Profile -->
-                <div class="cards-section" id="profile-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
-                    <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
-                        <h3 style="margin-top: 0; font-weight: bold;">Name</h3>
-                        <p>{{ Auth::user()->name }}</p>
-                    </div>
-                    <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
-                        <h3 style="margin-top: 0; font-weight: bold;">Email</h3>
-                        <p>{{ Auth::user()->email }}</p>
-                    </div>
-                </div>
-            </main>
+
+                <!-- Add real grade data as needed -->
         </div>
+
+        <!-- Profile -->
+        <div class="cards-section" id="profile-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+            <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; font-weight: bold;">Name</h3>
+                <p>{{ Auth::user()->name }}</p>
+            </div>
+            <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; font-weight: bold;">Email</h3>
+                <p>{{ Auth::user()->email }}</p>
+            </div>
+        </div>
+        </main>
+    </div>
     </div>
 
     <script>
