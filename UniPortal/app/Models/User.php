@@ -44,4 +44,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id');
     }
+
+  public function marks()
+{
+    return $this->hasMany(\App\Models\Mark::class, 'student_id');
+}
+
+
 }

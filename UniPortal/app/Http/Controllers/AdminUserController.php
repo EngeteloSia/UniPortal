@@ -11,13 +11,14 @@ class AdminUserController extends Controller
     public function index()
     {
         $users = User::whereIn('role', ['student', 'lecturer'])->get();
-        return view('dashnoard', compact('users'));
+        return view('admin.users.index', compact('users'));
+
     }
 
     // Show form to create a new user
     public function create()
     {
-        return view('dashnoard');
+        return view('dashboards.admin');
     }
 
     // Store the new user

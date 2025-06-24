@@ -62,10 +62,21 @@ Route::middleware(['auth', 'role:lecturer'])->group(function () {
 Route::post('/enroll', [EnrollmentController::class, 'enroll'])->name('enroll');
 
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::resource('/admin/users', AdminUserController::class);
-    Route::resource('/admin/courses', AdminCourseController::class);
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/users', AdminUserController::class);
+    Route::resource('/courses', AdminCourseController::class);
+});
+
+Route::middleware(['auth', 'role:student'])->group(function () {
+    Route::get('/student/progress-report', [StudentDashboardController::class, 'progressReport'])->name('student.progress.report');
+});
+
+use App\Http\Controllers\LecturerMarkController;
+
+Route::middleware(['auth', 'role:lecturer'])->prefix('lecturer')->name('lecturer.')->group(function () {
+    Route::get('/marks/create', [LecturerMarkController::class, 'create'])->name('marks.create');
+    Route::post('/marks', [LecturerMarkController::class, 'store'])->name('marks.store');
 });
 
 
