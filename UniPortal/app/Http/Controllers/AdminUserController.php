@@ -11,7 +11,8 @@ class AdminUserController extends Controller
     public function index()
     {
         $users = User::whereIn('role', ['student', 'lecturer'])->get();
-        return view('dashboards.admin', compact('users'));
+        return view('admin.users.index', compact('users'));
+
     }
 
     // Show form to create a new user

@@ -68,5 +68,17 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('/courses', AdminCourseController::class);
 });
 
+Route::middleware(['auth', 'role:student'])->group(function () {
+    Route::get('/student/progress-report', [StudentDashboardController::class, 'progressReport'])->name('student.progress.report');
+});
+
+use App\Http\Controllers\LecturerMarkController;
+
+Route::middleware(['auth', 'role:lecturer'])->prefix('lecturer')->name('lecturer.')->group(function () {
+    Route::get('/marks/create', [LecturerMarkController::class, 'create'])->name('marks.create');
+    Route::post('/marks', [LecturerMarkController::class, 'store'])->name('marks.store');
+});
+
+
 require __DIR__.'/auth.php';
 
