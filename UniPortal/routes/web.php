@@ -79,6 +79,12 @@ Route::middleware(['auth', 'role:lecturer'])->prefix('lecturer')->name('lecturer
     Route::post('/marks', [LecturerMarkController::class, 'store'])->name('marks.store');
 });
 
+use App\Http\Controllers\Api\CourseModuleController;
+
+Route::get('/courses/{course}/modules', [CourseModuleController::class, 'index']);
+
+
+
 
 require __DIR__.'/auth.php';
 
