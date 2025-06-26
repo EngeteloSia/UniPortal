@@ -71,7 +71,7 @@
                 credentials: 'same-origin',
                 headers: {
                     'Accept': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'  // Laravel Blade directive outputs CSRF token
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}' 
                 }
             });
 
