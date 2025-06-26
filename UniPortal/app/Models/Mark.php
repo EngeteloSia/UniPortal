@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mark extends Model
 {
-    protected $fillable = ['student_id', 'course_id', 'assessment_type', 'mark'];
+    protected $fillable = ['student_id', 'course_id', 'module_id', 'assessment_type', 'mark'];
 
     public function student()
     {
@@ -17,5 +17,9 @@ class Mark extends Model
     {
         return $this->belongsTo(Course::class);
     }
-}
 
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
+}
