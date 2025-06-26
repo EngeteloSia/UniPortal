@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +9,7 @@
 
     <!-- Tailwind CDN for convenience -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -18,7 +19,9 @@
         }
 
         /* Starfield animation layers */
-        .stars, .stars2, .stars3 {
+        .stars,
+        .stars2,
+        .stars3 {
             position: fixed;
             width: 100%;
             height: 100%;
@@ -42,8 +45,13 @@
         }
 
         @keyframes moveStars {
-            from { transform: translateY(0); }
-            to { transform: translateY(-1000px); }
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-1000px);
+            }
         }
 
         @keyframes fadeUp {
@@ -51,6 +59,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0);
@@ -63,18 +72,37 @@
 
         /* Planet animations */
         @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         @keyframes floatSlow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .animate-spin-slow {
@@ -90,7 +118,9 @@
         }
     </style>
 </head>
+
 <body class="relative min-h-screen flex items-center justify-center px-6">
+
 
     <!-- Starfield Layers -->
     <div class="stars"></div>
@@ -115,7 +145,11 @@
 
         <!-- Hero Section -->
         <section class="text-center px-10 py-14 animate-fade-up">
-            <h1 class="text-5xl font-bold text-indigo-300 mb-4 tracking-tight drop-shadow-md">🚀 Welcome to <span class="text-indigo-500">UniPortal</span></h1>
+            <div class="flex justify-center mb-6">
+                <img src="{{ asset('images/my-logo.png') }}" alt="Logo" class="max-h-20 max-w-[250px]" />
+            </div>
+
+            <h1 class="text-5xl font-bold text-indigo-300 mb-4 tracking-tight drop-shadow-md"> Welcome to <span class="text-indigo-500">UniPortal</span></h1>
             <p class="text-lg text-indigo-100 max-w-2xl mx-auto mb-6">
                 Embark on your academic journey — explore knowledge like stars in the universe.
             </p>
@@ -156,4 +190,5 @@
     </div>
 
 </body>
+
 </html>
