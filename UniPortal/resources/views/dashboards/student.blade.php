@@ -39,7 +39,7 @@
                     </div>
                     <div style="background: #e0f2fe; padding: 1rem; border-radius: 0.5rem; flex: 1 1 200px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Upcoming Exams</h3>
-                        <p>2</p> <!-- Replace with dynamic data if available -->
+                        <p>none</p> <!-- Replace with dynamic data if available -->
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@
                 </div>
 
 
-                <!-- Add real grade data as needed -->
+               
         </div>
 
         <!-- Profile -->
