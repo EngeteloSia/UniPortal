@@ -182,12 +182,8 @@
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="text-center text-indigo-200 text-sm py-4 border-t border-indigo-600 bg-indigo-900/20 animate-fade-up">
-            &copy; {{ date('Y') }} UniPortal. Explore. Discover. Achieve.
-        </footer>
-
     </div>
+    
 
 </body>
 
