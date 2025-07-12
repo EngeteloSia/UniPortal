@@ -1,3 +1,4 @@
+
 <x-app-layout>
     <x-slot name="header">
         <h2 style="font-weight: 600; font-size: 1.25rem; color: #1f2937; line-height: 1.5;">
@@ -82,24 +83,23 @@
                     @endforelse
                 </div>
 
-
-               
+                <!-- Profile -->
+                <div class="cards-section" id="profile-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+                    <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+                        <h3 style="margin-top: 0; font-weight: bold;">Name</h3>
+                        <p>{{ Auth::user()->name }}</p>
+                    </div>
+                    <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+                        <h3 style="margin-top: 0; font-weight: bold;">Email</h3>
+                        <p>{{ Auth::user()->email }}</p>
+                    </div>
+                </div>
+            </main>
         </div>
+    </div>
 
-        <!-- Profile -->
-        <div class="cards-section" id="profile-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
-            <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
-                <h3 style="margin-top: 0; font-weight: bold;">Name</h3>
-                <p>{{ Auth::user()->name }}</p>
-            </div>
-            <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
-                <h3 style="margin-top: 0; font-weight: bold;">Email</h3>
-                <p>{{ Auth::user()->email }}</p>
-            </div>
-        </div>
-        </main>
-    </div>
-    </div>
+    {{-- Footer outside the main content container for proper color separation --}}
+    @include('components.FEEfooter')
 
     <script>
         const links = {

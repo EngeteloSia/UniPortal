@@ -43,4 +43,5 @@
             </main>
         </div>
     </div>
+     @include('components.FEEfooter')
 </x-app-layout>
