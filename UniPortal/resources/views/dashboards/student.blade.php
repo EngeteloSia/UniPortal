@@ -100,7 +100,7 @@
 
     {{-- Footer outside the main content container for proper color separation --}}
     @include('components.FEEfooter')
-
+  
     <script>
         const links = {
             'dashboard-link': 'dashboard-cards',
