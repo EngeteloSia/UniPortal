@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <x-slot name="header">
         <h2 style="font-weight: 600; font-size: 1.25rem; color: #1f2937; line-height: 1.5;">
@@ -72,16 +71,35 @@
                 </div>
 
                 <!-- Grades -->
-                <div class="cards-section" id="grades-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
-                    @forelse ($marks as $mark)
-                    <div style="background: #fef9c3; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1); flex: 1 1 200px;">
-                        <h3 style="margin-top: 0; font-weight: bold;">{{ $mark->course->title }}</h3>
-                        <p>{{ $mark->score }}%</p>
+                <!-- Grades -->
+                <div class="cards-section" id="grades-cards" style="display: none; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+                    @if ($courses->isEmpty())
+                    <p class="text-gray-500">No courses enrolled.</p>
+                    @else
+                    @foreach ($courses as $course)
+                    <div style="background: #fef9c3; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+                        <h3 style="margin-top: 0; font-weight: bold;">{{ $course->title }}</h3>
+                        @if ($course->modules->isEmpty())
+                        <p>No modules available.</p>
+                        @else
+                        <ul>
+                            @foreach ($course->modules as $module)
+                            @php
+                            $moduleMark = $marks->firstWhere('module_id', $module->id);
+                            @endphp
+                            <li>
+                                {{ $module->title }} —
+                                <strong>{{ $moduleMark ? $moduleMark->mark . '%' : 'No mark yet' }}</strong>
+                            </li>
+
+                            @endforeach
+                        </ul>
+                        @endif
                     </div>
-                    @empty
-                    <p class="text-gray-500">No grades available yet.</p>
-                    @endforelse
+                    @endforeach
+                    @endif
                 </div>
+
 
                 <!-- Profile -->
                 <div class="cards-section" id="profile-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
@@ -100,7 +118,7 @@
 
     {{-- Footer outside the main content container for proper color separation --}}
     @include('components.FEEfooter')
-  
+
     <script>
         const links = {
             'dashboard-link': 'dashboard-cards',

@@ -89,6 +89,7 @@ Route::middleware('auth')->get('/courses/{course}/modules', [ModuleController::c
 
 
 
+Route::get('/courses/{course}/modules', [\App\Http\Controllers\ModuleController::class, 'getByCourse'])->name('courses.modules');
 
 require __DIR__.'/auth.php';
 
