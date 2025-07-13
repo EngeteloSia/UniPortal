@@ -67,7 +67,7 @@
         moduleSelect.disabled = true;
 
         try {
-            const response = await fetch(`/api/courses/${courseId}/modules`, {
+            const response = await fetch(`/courses/${courseId}/modules`, {
                 credentials: 'same-origin',
                 headers: {
                     'Accept': 'application/json',

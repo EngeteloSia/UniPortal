@@ -83,6 +83,10 @@ use App\Http\Controllers\Api\CourseModuleController;
 
 Route::get('/courses/{course}/modules', [CourseModuleController::class, 'index']);
 
+use App\Http\Controllers\ModuleController;
+
+Route::middleware('auth')->get('/courses/{course}/modules', [ModuleController::class, 'getByCourse']);
+
 
 
 
