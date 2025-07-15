@@ -15,4 +15,8 @@ class Module extends Model
     {
        return $this->belongsTo(Course::class);
     }
+    public function marks()
+{
+    return $this->hasMany(\App\Models\Mark::class);
+}
 }

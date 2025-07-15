@@ -53,21 +53,21 @@
                         <button id="close-modal" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
                         <h2 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 1rem;">Available Courses</h2>
                         @if ($availableCourses->isEmpty())
-                            <p>No courses available for enrollment.</p>
+                        <p>No courses available for enrollment.</p>
                         @else
-                            <ul style="margin: 0; padding-left: 1.5rem;">
-                                @foreach ($availableCourses as $course)
-                                    <li style="margin-bottom: 1rem;">
-                                        <strong>{{ $course->title }}</strong>
-                                        <form method="POST" action="{{ route('courses.enroll', $course->id) }}" style="display: inline;">
-                                            @csrf
-                                            <button type="submit" style="margin-left: 1rem; background: #1d4ed8; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; font-weight: 500; cursor: pointer;">
-                                                Enroll
-                                            </button>
-                                        </form>
-                                    </li>
-                                @endforeach
-                            </ul>
+                        <ul style="margin: 0; padding-left: 1.5rem;">
+                            @foreach ($availableCourses as $course)
+                            <li style="margin-bottom: 1rem;">
+                                <strong>{{ $course->title }}</strong>
+                                <form method="POST" action="{{ route('courses.enroll', $course->id) }}" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" style="margin-left: 1rem; background: #1d4ed8; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; font-weight: 500; cursor: pointer;">
+                                        Enroll
+                                    </button>
+                                </form>
+                            </li>
+                            @endforeach
+                        </ul>
                         @endif
                     </div>
                 </div>
@@ -77,52 +77,55 @@
                     <div style="background: #fff3cd; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Current Courses</h3>
                         @if ($courses->isEmpty())
-                            <p>No courses enrolled.</p>
+                        <p>No courses enrolled.</p>
                         @else
-                            <ul style="margin: 0; padding-left: 1.5rem;">
-                                @foreach ($courses as $course)
-                                    <li>
-                                        <strong>{{ $course->title }}</strong><br>
-                                        <small style="color: #4b5563;">{{ $course->description }}</small>
-                                        @if ($course->modules && $course->modules->count())
-                                            <ul style="padding-left: 1rem; margin-top: 0.5rem;">
-                                                @foreach ($course->modules as $module)
-                                                    <li>{{ $module->title }} - <small>{{ $module->description }}</small></li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
+                        <ul style="margin: 0; padding-left: 1.5rem;">
+                            @foreach ($courses as $course)
+                            <li>
+                                <strong>{{ $course->title }}</strong><br>
+                                <small style="color: #4b5563;">{{ $course->description }}</small>
+                                @if ($course->modules && $course->modules->count())
+                                <ul style="padding-left: 1rem; margin-top: 0.5rem;">
+                                    @foreach ($course->modules as $module)
+                                    <li>{{ $module->title }} - <small>{{ $module->description }}</small></li>
+                                    @endforeach
+                                </ul>
+                                @endif
+                            </li>
+                            @endforeach
+                        </ul>
                         @endif
                     </div>
                 </div>
 
+
                 <!-- Grades -->
                 <div class="cards-section" id="grades-cards" style="display: none; flex-direction: column; gap: 1rem; margin-top: 1rem;">
                     @if ($courses->isEmpty())
-                        <p class="text-gray-500">No courses enrolled.</p>
+                    <p class="text-gray-500">No courses enrolled.</p>
                     @else
-                        @foreach ($courses as $course)
-                            <div style="background: #fef9c3; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
-                                <h3 style="margin-top: 0; font-weight: bold;">{{ $course->title }}</h3>
-                                @if ($course->modules->isEmpty())
-                                    <p>No modules available.</p>
-                                @else
-                                    <ul>
-                                        @foreach ($course->modules as $module)
-                                            @php
-                                                $moduleMark = $marks->firstWhere('module_id', $module->id);
-                                            @endphp
-                                            <li>
-                                                {{ $module->title }} —
-                                                <strong>{{ $moduleMark ? $moduleMark->mark . '%' : 'No mark yet' }}</strong>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </div>
-                        @endforeach
+                    @foreach ($courses as $course)
+                    <div style="background: #fef9c3; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+                        <h3 style="margin-top: 0; font-weight: bold;">{{ $course->title }}</h3>
+                        @if ($course->modules->isEmpty())
+                        <p>No modules available.</p>
+                        @else
+                        <ul>
+                            @foreach ($course->modules as $module)
+                            @php
+                            $moduleMark = $marks->firstWhere('module_id', $module->id);
+                            @endphp
+                            <li>
+                                {{ $module->title }} —
+                                <strong>{{ $moduleMark ? $moduleMark->mark . '%' : 'No mark yet' }}</strong>
+                            </li>
+                            @endforeach
+                        </ul>
+                        @endif
+                    </div>
+                    @endforeach
+                    {{-- Progress Report Link in Grades section --}}
+                    <a href="{{ route('student.progress-report') }}" style="color:#1d4ed8; font-weight:500; margin-top:1rem; display:inline-block;">Progress Report</a>
                     @endif
                 </div>
 
@@ -136,6 +139,7 @@
                         <h3 style="margin-top: 0; font-weight: bold;">Email</h3>
                         <p>{{ Auth::user()->email }}</p>
                     </div>
+                    <a href="{{ route('student.progress-report') }}" style="color:#1d4ed8; font-weight:500;">Progress Report</a>
                 </div>
             </main>
         </div>
@@ -143,7 +147,7 @@
 
     <!-- Temporary Footer (Replace with your fixed FEEfooter) -->
     <footer style="background: #1d4ed8; color: white; padding: 1rem; text-align: center;">
-        <p>&copy; {{ date('Y') }} UniPortal. All rights reserved.</p>
+        @include('components.FEEfooter')
     </footer>
 
     <script>

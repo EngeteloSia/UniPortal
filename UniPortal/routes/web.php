@@ -90,8 +90,9 @@ use App\Http\Controllers\ModuleController;
 
 Route::middleware('auth')->get('/courses/{course}/modules', [ModuleController::class, 'getByCourse']);
 
-
+Route::get('/student/progress-report', [StudentDashboardController::class, 'progressReport'])->name('student.progress-report');
 // API routes for moduels 
 Route::get('/courses/{course}/modules', [\App\Http\Controllers\ModuleController::class, 'getByCourse'])->name('courses.modules');
-
+//PDF download route
+Route::get('/student/progress-report/pdf', [\App\Http\Controllers\StudentDashboardController::class, 'progressReportPdf'])->name('student.progress-report.pdf');
 require __DIR__ . '/auth.php';
