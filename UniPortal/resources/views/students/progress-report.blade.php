@@ -36,4 +36,4 @@
             </div>
         @endforeach
     </div>
-</x-app-
+</x-app-layout>
