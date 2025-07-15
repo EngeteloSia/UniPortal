@@ -11,6 +11,7 @@ use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminCourseController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
 });
+
+Route::post('/courses/{course}/enroll', [EnrollmentController::class, 'enroll'])->name('courses.enroll');
 
 // Lecturer-only dashboard
 Route::middleware(['auth', 'role:lecturer'])->group(function () {
@@ -88,7 +91,7 @@ use App\Http\Controllers\ModuleController;
 Route::middleware('auth')->get('/courses/{course}/modules', [ModuleController::class, 'getByCourse']);
 
 
+// API routes for moduels 
+Route::get('/courses/{course}/modules', [\App\Http\Controllers\ModuleController::class, 'getByCourse'])->name('courses.modules');
 
-
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';
