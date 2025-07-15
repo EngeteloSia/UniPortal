@@ -1,22 +1,24 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\Course;
 
 class StudentDashboardController extends Controller
 {
     public function index()
     {
-        $student = Auth::user(); // current logged-in user (student)
+       $student = Auth::user();
 
-        // Get enrolled courses with modules, ensuring uniqueness
-        $courses = $student->enrolledCourses()->with('modules')->get()->unique('id');
+    $courses = $student->enrolledCourses()->with('modules')->get()->unique('id');
+    $marks = $student->marks()->with(['course', 'module'])->get();
+    $enrolledIds = $courses->pluck('id');
+    $availableCourses = \App\Models\Course::whereNotIn('id', $enrolledIds)->get();
 
-        // Get marks with related course and module info
-        $marks = $student->marks()->with(['course', 'module'])->get();
-
-        return view('dashboard', compact('courses', 'marks'));
+    // Return the correct view!
+    return view('dashboards.student', compact('courses', 'marks', 'availableCourses'));
     }
 
     public function progressReport()
