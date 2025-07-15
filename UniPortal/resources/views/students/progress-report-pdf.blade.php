@@ -1,29 +1,94 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>Progress Report</title>
     <style>
-        body { font-family: DejaVu Sans, sans-serif; margin: 30px; }
-        h2 { color: #1d4ed8; border-bottom: 2px solid #1d4ed8; padding-bottom: 8px; }
-        h4 { margin-bottom: 0; color: #374151; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
-        th, td { border: 1px solid #d1d5db; padding: 8px; text-align: left; }
-        th { background: #f3f4f6; }
-        .footer { text-align: center; color: #6b7280; font-size: 0.9rem; margin-top: 2rem; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'DejaVu Sans', Arial, sans-serif;
+            margin: 30px;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #1D4ED8;
+            padding-bottom: 8px;
+        }
+        .header-logo {
+            max-height: 50px;
+            margin-right: 20px;
+        }
+        .header-title {
+            color: #1D4ED8;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .student-info {
+            margin-bottom: 20px;
+        }
+        .student-info strong {
+            color: #374151;
+        }
+        .course-title {
+            color: #374151;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .no-modules {
+            color: #374151;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #D1D5DB;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #F3F4F6;
+            font-weight: bold;
+            color: #374151;
+        }
+        .footer {
+            text-align: center;
+            color: #6B7280;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid #D1D5DB;
+            padding-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <h2>Progress Report</h2>
-    <p><strong>Student:</strong> {{ $student->name }}<br>
-    <strong>Email:</strong> {{ $student->email }}</p>
-    <p><strong>Date:</strong> {{ \Carbon\Carbon::now()->format('d M Y') }}</p>
+    <div class="header-container">
+        <img src="{{ asset('images/logo.png') }}" alt="UniPortal Logo" class="header-logo">
+        <div class="header-title">Progress Report</div>
+    </div>
+
+    <div class="student-info">
+        <strong>Student:</strong> {{ $student->name }}<br>
+        <strong>Email:</strong> {{ $student->email }}<br>
+        <strong>Date:</strong> {{ \Carbon\Carbon::now()->format('d M Y') }}
+    </div>
 
     @foreach($courses as $course)
-        <h4>{{ $course->title }}</h4>
+        <div class="course-title">{{ $course->title }}</div>
         @if($course->modules->isEmpty())
-            <p>No modules for this course.</p>
+            <div class="no-modules">No modules for this course.</div>
         @else
             <table>
                 <thead>
@@ -48,7 +113,7 @@
     @endforeach
 
     <div class="footer">
-        &copy; {{ date('Y') }} UniPortal. Generated on {{ \Carbon\Carbon::now()->format('d M Y H:i') }}
+        © {{ date('Y') }} UniPortal. Generated on {{ \Carbon\Carbon::now()->format('d M Y H:i') }}
     </div>
 </body>
 </html>
