@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StudentDashboardController extends Controller
 {
