@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class EnrollmentController extends Controller
+class FEEEnrollmentController extends Controller
 {
     public function enroll(Request $request)
     {

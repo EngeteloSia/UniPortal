@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 
-class LecturerCourseController extends Controller
+class FEELecturerCourseController extends Controller
 {
     public function store(Request $request)
     {

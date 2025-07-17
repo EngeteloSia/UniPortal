@@ -132,6 +132,11 @@
         </main>
     </div>
     </div>
+    <a href="{{ auth()->user()->role === 'student' ? route('student.email.form') : route('lecturer.email.form') }}"
+   style="color: #1d4ed8; font-weight: 600;">
+   📧 Send Email
+</a>
+
 
     @include('components.FEEfooter')
 

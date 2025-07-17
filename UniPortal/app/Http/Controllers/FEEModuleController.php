@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Http\Request;
 
-class ModuleController extends Controller
+class FEEModuleController extends Controller
 {
     public function getByCourse(Course $course)
     {
