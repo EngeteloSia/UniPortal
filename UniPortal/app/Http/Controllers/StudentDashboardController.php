@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class StudentDashboardController extends Controller
+class FEEStudentDashboardController extends Controller
 {
     public function index()
     {

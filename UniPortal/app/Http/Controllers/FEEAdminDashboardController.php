@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 
-class AdminDashboardController extends Controller
+class FEEAdminDashboardController extends Controller
 {
     public function index()
 {

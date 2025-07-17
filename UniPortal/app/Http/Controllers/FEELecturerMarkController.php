@@ -7,7 +7,7 @@ use App\Models\Course;
 use App\Models\Mark;
 use Illuminate\Http\Request;
 
-class LecturerMarkController extends Controller
+class FEELecturerMarkController extends Controller
 {
     public function create()
     {

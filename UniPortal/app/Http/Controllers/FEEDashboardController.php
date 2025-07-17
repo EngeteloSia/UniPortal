@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\User;
 
-class DashboardController extends Controller
+class FEEDashboardController extends Controller
 {
     public function index()
     {
