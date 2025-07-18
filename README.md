@@ -118,6 +118,8 @@ public function progressReportPdf()
     return $pdf->download('progress-report.pdf');
 }
 ```
+![ER Diagram](graph.png)
+
 
 ---
 
