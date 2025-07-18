@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 
-class FEELecturerController extends Controller
+class EEFlecturerController extends Controller
 {
     // Show list of students with courses to enroll
     public function students()
@@ -23,7 +23,7 @@ class FEELecturerController extends Controller
         return view('lecturer.students', compact('students', 'courses'));
     }
 
-    // Enroll a student in a course
+    // Enroll a student in a Course
     public function enroll(Request $request)
     {
         $request->validate([
@@ -33,12 +33,12 @@ class FEELecturerController extends Controller
 
         $lecturer = Auth::user();
 
-        // Ensure the course belongs to this lecturer
+        // Ensure the Course belongs to this lecturer
         $course = $lecturer->courses()->findOrFail($request->course_id);
 
         $student = User::findOrFail($request->student_id);
 
-        // Attach student to course without detaching existing
+        // Attach student to Course without detaching existing
         $student->enrolledCourses()->syncWithoutDetaching([$course->id]);
 
         return redirect()->back()->with('success', 'Student enrolled successfully.');

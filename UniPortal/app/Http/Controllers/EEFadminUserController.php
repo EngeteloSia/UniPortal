@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class FEEAdminUserController extends Controller
+class EEFadminUserController extends Controller
 {
     // List all users (students and lecturers)
     public function index()

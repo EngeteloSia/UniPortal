@@ -8,7 +8,7 @@ use App\Models\Course;
 
 use Illuminate\Http\Request;
 
-class FEELecturerDashboardController extends Controller
+class EEFlecturerDashboardController extends Controller
 {
     public function index()
     {

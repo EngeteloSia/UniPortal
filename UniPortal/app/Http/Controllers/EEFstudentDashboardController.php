@@ -14,7 +14,7 @@ class FEEStudentDashboardController extends Controller
         $student = Auth::user();
 
         $courses = $student->enrolledCourses()->with('modules')->get()->unique('id');
-        $marks = $student->marks()->with(['course', 'module'])->get();
+        $marks = $student->marks()->with(['Course', 'module'])->get();
         $enrolledIds = $courses->pluck('id');
         $availableCourses = \App\Models\Course::whereNotIn('id', $enrolledIds)->get();
 

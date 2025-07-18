@@ -18,7 +18,7 @@ class CourseSeeder extends Seeder
         foreach ($lecturers as $index => $lecturer) {
             Course::create([
                 'title' => 'Course ' . ($index + 1),
-                'description' => 'This is a test course created for ' . $lecturer->name,
+                'description' => 'This is a test Course created for ' . $lecturer->name,
                 'lecturer_id' => $lecturer->id,
             ]);
         }

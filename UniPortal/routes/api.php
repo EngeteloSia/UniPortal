@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\CourseModuleController;
+use App\Http\Controllers\Api\FEECourseModuleController;
 
-Route::get('/courses/{course}/modules', [CourseModuleController::class, 'index']);
+Route::get('/courses/{Course}/modules', [FEECourseModuleController::class, 'index']);
 
 Route::get('/test', function () {
     return ['message' => 'API is working'];});

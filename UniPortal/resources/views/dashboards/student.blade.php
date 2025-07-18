@@ -144,7 +144,11 @@
             </main>
         </div>
     </div>
-    
+    <a href="{{ route('email.form') }}"
+        class="inline-block !bg-blue-600 !text-white px-4 py-2 rounded !hover:bg-blue-700">
+        📧 Send Email
+    </a>
+
 
     <!-- Temporary Footer (Replace with your fixed FEEfooter) -->
     <footer style="background: #1d4ed8; color: white; padding: 1rem; text-align: center;">

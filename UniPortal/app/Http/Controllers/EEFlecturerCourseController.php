@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 
-class FEELecturerCourseController extends Controller
+class EEFlecturerCourseController extends Controller
 {
     public function store(Request $request)
     {
@@ -20,7 +20,7 @@ class FEELecturerCourseController extends Controller
 
         $lecturer = Auth::user();
 
-        // Create the course
+        // Create the Course
         $course = new Course();
         $course->title = $request->title;
         $course->description = $request->description;

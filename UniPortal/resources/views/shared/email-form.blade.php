@@ -1,19 +1,48 @@
-<form action="{{ $formAction }}" method="POST" class="email-form" style="max-width:600px; margin-top:1rem;">
-    @csrf
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="text-xl font-semibold text-pink-700 leading-tight">✉️ Send Email</h2>
+    </x-slot>
 
-    <label for="recipient_email" style="font-weight: 600;">Recipient Email</label><br>
-    <input type="email" name="recipient_email" id="recipient_email" value="{{ old('recipient_email', $recipientEmail ?? '') }}" required
-        style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 0.25rem;">
+    <div class="py-6 px-4 max-w-2xl mx-auto">
+        @if (session('success'))
+        <div class="bg-green-100 text-green-800 p-4 rounded mb-4">
+            {{ session('success') }}
+        </div>
+        @endif
 
-    <label for="subject" style="font-weight: 600;">Subject</label><br>
-    <input type="text" name="subject" id="subject" value="{{ old('subject') }}" required
-        style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 0.25rem;">
+        <form action="{{ $formAction }}" method="POST" class="space-y-4">
+            @csrf
 
-    <label for="message" style="font-weight: 600;">Message</label><br>
-    <textarea name="message" id="message" rows="6" required
-        style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 0.25rem;">{{ old('message') }}</textarea>
+            <div>
+                <label for="recipient_email">Select Recipient</label>
+                <select name="recipient_email" required class="form-select w-full rounded border-gray-300 shadow-sm">
+                    <option value="">-- Select a user --</option>
+                    @foreach ($users as $user)
+                    <option value="{{ $user->email }}" {{ old('recipient_email') == $user->email ? 'selected' : '' }}>
+                        {{ $user->name }} ({{ $user->email }})
+                    </option>
+                    @endforeach
+                </select>
+            </div>
 
-    <button type="submit" style="background: #1d4ed8; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; font-weight: 600; cursor: pointer;">
-        Send Email
-    </button>
-</form>
+
+            <div>
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" value="{{ old('subject') }}"
+                    required class="form-input w-full rounded border-gray-300 shadow-sm">
+            </div>
+
+            <div>
+                <label for="message">Message</label>
+                <textarea name="message" rows="5" required
+                    class="form-textarea w-full rounded border-gray-300 shadow-sm">{{ old('message') }}</textarea>
+            </div>
+
+            <button type="submit" style="background-color: #2563eb !important; color: white !important;" 
+    class="py-2 px-4 rounded hover:bg-blue-700 transition duration-200">
+    Send Email
+</button>
+
+        </form>
+    </div>
+</x-app-layout>

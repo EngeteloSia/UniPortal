@@ -140,7 +140,7 @@
 
     @include('components.FEEfooter')
 
-    
+
     <script>
         const links = {
             'dashboard-link': 'dashboard-cards',

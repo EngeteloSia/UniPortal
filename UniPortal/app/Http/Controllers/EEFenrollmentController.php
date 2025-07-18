@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class FEEEnrollmentController extends Controller
+class EEFenrollmentController extends Controller
 {
     public function enroll(Request $request)
     {
@@ -18,7 +18,7 @@ class FEEEnrollmentController extends Controller
         // Find student and enroll
         $student = User::findOrFail($request->student_id);
 
-        // Attach course
+        // Attach Course
         $student->enrolledCourses()->attach($request->course_id);
 
         return redirect()->back()->with('success', 'Student enrolled successfully!');

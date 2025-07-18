@@ -51,7 +51,7 @@
     </div>
 
     <script>
-    const courseSelect = document.getElementById('course-select');
+    const courseSelect = document.getElementById('Course-select');
     const moduleSelect = document.getElementById('module-select');
 
     courseSelect.addEventListener('change', async function() {
@@ -71,7 +71,7 @@
                 credentials: 'same-origin',
                 headers: {
                     'Accept': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}' 
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
             });
 

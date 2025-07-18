@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\User;
 
-class FEEDashboardController extends Controller
+class EEFdashboardController extends Controller
 {
     public function index()
     {
@@ -17,7 +17,7 @@ class FEEDashboardController extends Controller
             return redirect()->route('admin.dashboard');
         } elseif ($user->role === 'student') {
             $courses = $user->enrolledCourses()->with('modules')->get();
-            $marks = $user->marks()->with('course')->get();
+            $marks = $user->marks()->with('Course')->get();
 
             // Get courses NOT enrolled by the student
             $enrolledIds = $courses->pluck('id');
