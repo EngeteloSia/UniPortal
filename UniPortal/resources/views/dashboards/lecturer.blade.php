@@ -5,19 +5,25 @@
         </h2>
     </x-slot>
 
-    <!-- Animate.css CDN -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <div class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-6 lg:p-8">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
 
-            <!-- Sidebar -->
+           
             <nav class="bg-white shadow-2xl rounded-2xl p-6 flex flex-col h-fit lg:h-[calc(100vh-8rem)] animate__animated animate__fadeInLeft">
                 <ul class="space-y-3 flex-grow">
                     <li><a href="#" id="dashboard-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Dashboard</a></li>
                     <li><a href="#" id="courses-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Manage Courses</a></li>
                     <li><a href="#" id="students-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Enrolled Students</a></li>
                     <li><a href="#" id="profile-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Profile</a></li>
+                    <a href="{{ route('email.form') }}" class="block mb-2 text-blue-700 font-semibold hover:underline">
+                        📧 Send Email
+                    </a>
+                    <a href="{{ route('email.inbox') }}" class="block mb-2 text-blue-700 font-semibold hover:underline">
+                        📥 Inbox
+                    </a>
                     <li><a href="{{ route('lecturer.marks.create') }}" class="block px-4 py-2 text-blue-700 hover:underline">Enter Student Marks</a></li>
                 </ul>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="mt-auto">

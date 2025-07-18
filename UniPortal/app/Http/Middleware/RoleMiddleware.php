@@ -21,7 +21,7 @@ class RoleMiddleware
         abort(403, 'Unauthorized');
     }
 
-    // Allow all users if no role is set yet (temporary)
+
     if (empty($user->role)) {
         return $next($request);
     }

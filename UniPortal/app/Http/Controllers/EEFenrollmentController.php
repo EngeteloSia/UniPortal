@@ -9,16 +9,16 @@ class EEFenrollmentController extends Controller
 {
     public function enroll(Request $request)
     {
-        // Validate incoming data
+
         $request->validate([
             'student_id' => 'required|exists:users,id',
             'course_id' => 'required|exists:courses,id',
         ]);
 
-        // Find student and enroll
+
         $student = User::findOrFail($request->student_id);
 
-        // Attach Course
+
         $student->enrolledCourses()->attach($request->course_id);
 
         return redirect()->back()->with('success', 'Student enrolled successfully!');

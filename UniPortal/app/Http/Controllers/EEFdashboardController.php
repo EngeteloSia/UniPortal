@@ -19,7 +19,7 @@ class EEFdashboardController extends Controller
             $courses = $user->enrolledCourses()->with('modules')->get();
             $marks = $user->marks()->with('Course')->get();
 
-            // Get courses NOT enrolled by the student
+
             $enrolledIds = $courses->pluck('id');
             $availableCourses = Course::whereNotIn('id', $enrolledIds)->get();
 

@@ -27,7 +27,7 @@ class EEFlecturerCourseController extends Controller
         $course->lecturer_id = $lecturer->id;
         $course->save();
 
-        // Save modules if provided
+
         if ($request->filled('modules')) {
             foreach ($request->modules as $moduleData) {
                 // Only save modules with a title (ignore empty)

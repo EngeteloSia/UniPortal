@@ -9,21 +9,21 @@ use App\Models\User;
 
 class EEFlecturerController extends Controller
 {
-    // Show list of students with courses to enroll
+
     public function students()
     {
         $lecturer = Auth::user();
 
-        // Get all students
+
         $students = User::where('role', 'student')->get();
 
-        // Get courses this lecturer teaches
+
         $courses = $lecturer->courses()->get();
 
         return view('lecturer.students', compact('students', 'courses'));
     }
 
-    // Enroll a student in a Course
+
     public function enroll(Request $request)
     {
         $request->validate([
@@ -33,12 +33,12 @@ class EEFlecturerController extends Controller
 
         $lecturer = Auth::user();
 
-        // Ensure the Course belongs to this lecturer
+
         $course = $lecturer->courses()->findOrFail($request->course_id);
 
         $student = User::findOrFail($request->student_id);
 
-        // Attach student to Course without detaching existing
+
         $student->enrolledCourses()->syncWithoutDetaching([$course->id]);
 
         return redirect()->back()->with('success', 'Student enrolled successfully.');

@@ -26,7 +26,7 @@ class EEFtestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.test', // <- Use your Blade view here
+            view: 'emails.test',
         );
     }
 

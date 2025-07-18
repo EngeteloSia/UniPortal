@@ -5,21 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EEFuserToUserEmail;
+use App\Models\FMessage;
+use App\Models\User;
 
 
 class EEFemailController extends Controller
 {
     public function showEmailForm(Request $request)
     {
-        // Determine the authenticated user's role
+        
         $role = auth()->user()->role;
 
-        // Determine form action based on user role
+        
         $formAction = $role === 'student'
             ? route('student.email.send')
             : route('lecturer.email.send');
 
-        // Get a list of potential recipients (opposite role only)
+     
         $users = $role === 'student'
             ? \App\Models\User::where('role', 'lecturer')->get()
             : \App\Models\User::where('role', 'student')->get();
@@ -28,9 +30,10 @@ class EEFemailController extends Controller
     }
 
 
+
     public function sendEmail(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'recipient_email' => 'required|email',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
@@ -38,9 +41,47 @@ class EEFemailController extends Controller
 
         $sender = auth()->user();
 
-        // Send the email using a Mailable class
-        Mail::to($request->recipient_email)->send(new EEFuserToUserEmail($sender, $request->subject, $request->message));
+        
+        $recipient = User::where('email', $data['recipient_email'])->firstOrFail();
 
-        return back()->with('success', 'Email sent successfully!');
+      
+        FMessage::create([
+            'sender_id' => $sender->id,
+            'recipient_id' => $recipient->id,
+            'subject' => $data['subject'],
+            'body' => $data['message'],
+        ]);
+
+        // Send the actual email
+        Mail::to($recipient->email)
+            ->send(new EEFuserToUserEmail($sender, $data['subject'], $data['message']));
+
+        return back()->with('success', 'Email sent and saved successfully!');
+    }
+
+    public function inbox()
+    {
+        $userId = auth()->id();
+
+        // Fetch messages where the user is sender or recipient, newest first
+        $messages = FMessage::where('sender_id', $userId)
+            ->orWhere('recipient_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->with(['sender', 'recipient'])  
+            ->get();
+
+        return view('emails.inbox', compact('messages'));
+    }
+
+    public function show($id)
+    {
+        $message = FMessage::with(['sender', 'recipient'])->findOrFail($id);
+
+        
+        if (auth()->id() === $message->recipient_id && is_null($message->read_at)) {
+            $message->update(['read_at' => now()]);
+        }
+
+        return view('emails.show', compact('message'));
     }
 }

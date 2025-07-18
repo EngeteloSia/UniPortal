@@ -18,7 +18,7 @@ class FEEStudentDashboardController extends Controller
         $enrolledIds = $courses->pluck('id');
         $availableCourses = \App\Models\Course::whereNotIn('id', $enrolledIds)->get();
 
-        // Return the correct view!
+
         return view('dashboards.student', compact('courses', 'marks', 'availableCourses'));
     }
 

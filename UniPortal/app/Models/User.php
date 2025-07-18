@@ -15,7 +15,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role', // student | lecturer
+        'role',
     ];
 
     protected $hidden = [
@@ -31,13 +31,13 @@ class User extends Authenticatable
         ];
     }
 
-    // If user is a lecturer
+
    public function courses()
     {
         return $this->hasMany(Course::class, 'lecturer_id');
     }
 
-    // If user is a student
+
     public function enrolledCourses()
     {
         return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id');

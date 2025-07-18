@@ -118,4 +118,12 @@ Route::middleware(['auth', 'verified', 'role:lecturer'])->group(function () {
     Route::post('/lecturer/email/send', [EEFemailController::class, 'sendEmail'])->name('lecturer.email.send');
 });
 
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/inbox', [EEFemailController::class, 'inbox'])->name('email.inbox');
+});
+Route::get('/email/{id}', [EEFemailController::class, 'show'])->name('email.show');
+
+
 require __DIR__ . '/auth.php';
