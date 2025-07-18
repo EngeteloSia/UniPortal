@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class FEEAdminUserController extends Controller
+class EEFadminUserController extends Controller
 {
-    // List all users (students and lecturers)
+
     public function index()
     {
         $users = User::whereIn('role', ['student', 'lecturer'])->get();
@@ -15,13 +15,13 @@ class FEEAdminUserController extends Controller
 
     }
 
-    // Show form to create a new user
+
     public function create()
     {
         return view('dashboards.admin');
     }
 
-    // Store the new user
+
     public function store(Request $request)
     {
         $request->validate([
@@ -41,7 +41,7 @@ class FEEAdminUserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     }
 
-    // Delete a user
+
     public function destroy(User $user)
     {
         $user->delete();

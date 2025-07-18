@@ -16,8 +16,8 @@ return new class extends Migration
     $table->foreignId('student_id')->constrained('users')->onDelete('cascade');
     $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
     $table->foreignId('module_id')->constrained()->onDelete('cascade'); // Add this line
-    $table->string('assessment_type')->nullable(); // e.g. Exam, Assignment
-    $table->decimal('mark', 5, 2); // e.g. 95.50
+    $table->string('assessment_type')->nullable();
+    $table->decimal('mark', 5, 2);
     $table->timestamps();
 });
 }

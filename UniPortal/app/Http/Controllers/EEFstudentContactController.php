@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
-class FEEStudentContactController extends Controller
+class EEFstudentContactController extends Controller
 {
     public function send(Request $request)
     {

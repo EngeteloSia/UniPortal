@@ -18,6 +18,13 @@
                     <a href="#" id="courses-link" style="display: block; margin-bottom: 0.5rem; color: #1d4ed8; text-decoration: none; font-weight: 500;">My Courses</a>
                     <a href="#" id="grades-link" style="display: block; margin-bottom: 0.5rem; color: #1d4ed8; text-decoration: none; font-weight: 500;">Grades</a>
                     <a href="#" id="profile-link" style="display: block; margin-bottom: 0.5rem; color: #1d4ed8; text-decoration: none; font-weight: 500;">Profile</a>
+                    <!-- Existing nav links -->
+                    <a href="{{ route('email.form') }}" class="block mb-2 text-blue-700 font-semibold hover:underline">
+                        📧 Send Email
+                    </a>
+                    <a href="{{ route('email.inbox') }}" class="block mb-2 text-blue-700 font-semibold hover:underline">
+                        📥 Inbox
+                    </a>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="display: block; color: red; font-weight: 500;">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
                 </nav>
@@ -144,7 +151,11 @@
             </main>
         </div>
     </div>
-    
+    <a href="{{ route('email.form') }}"
+        class="inline-block !bg-blue-600 !text-white px-4 py-2 rounded !hover:bg-blue-700">
+        📧 Send Email
+    </a>
+
 
     <!-- Temporary Footer (Replace with your fixed FEEfooter) -->
     <footer style="background: #1d4ed8; color: white; padding: 1rem; text-align: center;">

@@ -8,7 +8,7 @@
     <div class="p-6 bg-white rounded-lg shadow mt-4">
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-semibold text-gray-700">Course List</h3>
-            <a href="{{ route('admin.courses.create') }}" 
+            <a href="{{ route('admin.courses.create') }}"
                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
                + Add Course
             </a>
@@ -36,7 +36,7 @@
                             </td>
                             <td class="px-6 py-4 space-x-2">
                                 <a href="#" class="text-indigo-600 hover:underline">Edit</a>
-                                <form action="{{ route('admin.courses.destroy', $course) }}" method="POST" class="inline-block" onsubmit="return confirm('Delete this course?')">
+                                <form action="{{ route('admin.courses.destroy', $course) }}" method="POST" class="inline-block" onsubmit="return confirm('Delete this Course?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:underline">Delete</button>

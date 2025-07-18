@@ -5,22 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Http\Request;
 
-class FEEAdminCourseController extends Controller
+class EEFadminCourseController extends Controller
 {
-    // List all courses
+    
     public function index()
     {
         $courses = Course::with('lecturer')->get();
         return view('admin.courses.index', compact('courses'));
     }
 
-    // Show form to create a new course
+    
     public function create()
     {
         return view('admin.courses.create');
     }
 
-    // Store a new course
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -34,7 +34,7 @@ class FEEAdminCourseController extends Controller
         return redirect()->route('admin.courses.index')->with('success', 'Course created.');
     }
 
-    // Delete a course
+   
     public function destroy(Course $course)
     {
         $course->delete();
