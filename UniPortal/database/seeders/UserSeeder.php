@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Create or update 2 lecturers
+        
         User::updateOrCreate(
             ['email' => 'alice@uni.test'],
             [
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             ]
         );
 
-        // Create or update 5 students
+        
         for ($i = 1; $i <= 5; $i++) {
             User::updateOrCreate(
                 ['email' => "student{$i}@uni.test"],

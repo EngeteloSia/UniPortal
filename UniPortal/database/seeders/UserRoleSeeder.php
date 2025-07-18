@@ -9,7 +9,7 @@ class UserRoleSeeder extends Seeder
 {
     public function run()
     {
-        // Example: create a lecturer user (or update existing)
+        
         $lecturer = User::firstOrCreate(
             ['email' => 'lecturer@example.com'],
             [
@@ -19,7 +19,7 @@ class UserRoleSeeder extends Seeder
             ]
         );
 
-        // Example: create a student user (or update existing)
+        
         $student = User::firstOrCreate(
             ['email' => 'student@example.com'],
             [

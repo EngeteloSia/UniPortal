@@ -11,7 +11,6 @@ class CourseWithModulesSeeder extends Seeder
 {
     public function run()
     {
-        // Find a lecturer user to assign courses to
         $lecturer = User::where('role', 'lecturer')->first();
 
         if (!$lecturer) {
@@ -19,7 +18,7 @@ class CourseWithModulesSeeder extends Seeder
             return;
         }
 
-        // Example courses with modules
+        
         $coursesData = [
             [
                 'title' => 'Introduction to Web Development',

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('status')->default('pending'); // 'pending', 'accepted', 'rejected'
             $table->timestamps();
 
-            // Ensure a student can't request enrollment in the same course multiple times
+           
             $table->unique(['student_id', 'course_id']);
         });
     }

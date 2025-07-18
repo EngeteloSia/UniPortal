@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder
     );
 
     $this->call([
-        UserSeeder::class,          // create lecturers and students first
-        CourseSeeder::class,        // optional, if you want simple test courses
-        CourseWithModulesSeeder::class,  // creates courses with modules assigned to first lecturer
-        EnrollmentSeeder::class,    // enroll students after courses exist
+        UserSeeder::class,          
+        CourseSeeder::class,        
+        CourseWithModulesSeeder::class,  
+        EnrollmentSeeder::class,    
     ]);
 }
 }

@@ -17,7 +17,7 @@ class EnrollmentSeeder extends Seeder
         $courses = Course::all();
 
         foreach ($students as $student) {
-            // Enroll each student in 1 to 2 random courses
+           
             $student->enrolledCourses()->attach(
                 $courses->random(rand(1, min(2, $courses->count())))->pluck('id')
             );

@@ -140,10 +140,10 @@
         <img src="{{ asset('images/moon.svg') }}" alt="Moon" class="w-full h-full">
     </div>
 
-    <!-- Main Content -->
+    
     <div class="w-full max-w-5xl bg-white/10 backdrop-blur-md shadow-2xl rounded-2xl overflow-hidden z-10 text-white">
 
-        <!-- Hero Section -->
+        
         <section class="text-center px-10 py-14 animate-fade-up">
             <div class="flex justify-center mb-6">
                 <img src="{{ asset('images/my-logo.png') }}" alt="Logo" class="max-h-20 max-w-[250px]" />
@@ -163,7 +163,7 @@
             </div>
         </section>
 
-        <!-- Features Section -->
+        
         <section class="grid grid-cols-1 sm:grid-cols-3 gap-8 px-10 py-12 animate-fade-up">
             <div class="text-center hover:scale-105 transition-transform duration-300">
                 <div class="text-4xl mb-3">📘</div>

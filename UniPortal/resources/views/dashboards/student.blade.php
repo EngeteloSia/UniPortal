@@ -18,7 +18,7 @@
                     <a href="#" id="courses-link" style="display: block; margin-bottom: 0.5rem; color: #1d4ed8; text-decoration: none; font-weight: 500;">My Courses</a>
                     <a href="#" id="grades-link" style="display: block; margin-bottom: 0.5rem; color: #1d4ed8; text-decoration: none; font-weight: 500;">Grades</a>
                     <a href="#" id="profile-link" style="display: block; margin-bottom: 0.5rem; color: #1d4ed8; text-decoration: none; font-weight: 500;">Profile</a>
-                    <!-- Existing nav links -->
+                    
                     <a href="{{ route('email.form') }}" class="block mb-2 text-blue-700 font-semibold hover:underline">
                         📧 Send Email
                     </a>
@@ -34,7 +34,7 @@
                 <h1 style="font-size: 1.5rem; font-weight: bold;">Welcome, {{ Auth::user()->name }}</h1>
                 <p style="color: #4b5563;">Here are your enrolled courses and academic status.</p>
 
-                <!-- Dashboard Cards -->
+                
                 <div class="cards-section" id="dashboard-cards" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
                     <div style="background: #e0f2fe; padding: 1rem; border-radius: 0.5rem; flex: 1 1 200px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Total Courses</h3>
@@ -42,19 +42,18 @@
                     </div>
                     <div style="background: #e0f2fe; padding: 1rem; border-radius: 0.5rem; flex: 1 1 200px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Average Grade</h3>
-                        <p>75%</p> <!-- Replace with dynamic data if available -->
+                        <p>Not yet calculated</p> 
                     </div>
                     <div style="background: #e0f2fe; padding: 1rem; border-radius: 0.5rem; flex: 1 1 200px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Upcoming Exams</h3>
-                        <p>none</p> <!-- Replace with dynamic data if available -->
-                    </div>
+                        <p>none</p> 
                     <div style="background: #e0e7ff; padding: 1rem; border-radius: 0.5rem; flex: 1 1 200px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Enroll in Courses</h3>
                         <button id="enroll-button" style="background: #1d4ed8; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; font-weight: 500; cursor: pointer;">Browse Courses</button>
                     </div>
                 </div>
 
-                <!-- Course Enrollment Modal -->
+                
                 <div id="enroll-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
                     <div style="background: white; padding: 2rem; border-radius: 0.5rem; width: 90%; max-width: 500px; max-height: 80%; overflow-y: auto; position: relative;">
                         <button id="close-modal" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
@@ -79,7 +78,7 @@
                     </div>
                 </div>
 
-                <!-- My Courses -->
+                
                 <div class="cards-section" id="courses-cards" style="display: none; flex-direction: column; gap: 1rem; margin-top: 1rem;">
                     <div style="background: #fff3cd; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Current Courses</h3>
@@ -106,7 +105,7 @@
                 </div>
 
 
-                <!-- Grades -->
+                
                 <div class="cards-section" id="grades-cards" style="display: none; flex-direction: column; gap: 1rem; margin-top: 1rem;">
                     @if ($courses->isEmpty())
                     <p class="text-gray-500">No courses enrolled.</p>
@@ -136,7 +135,7 @@
                     @endif
                 </div>
 
-                <!-- Profile -->
+                
                 <div class="cards-section" id="profile-cards" style="display: none; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
                     <div style="background: #ede9fe; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
                         <h3 style="margin-top: 0; font-weight: bold;">Name</h3>
@@ -157,7 +156,7 @@
     </a>
 
 
-    <!-- Temporary Footer (Replace with your fixed FEEfooter) -->
+    
     <footer style="background: #1d4ed8; color: white; padding: 1rem; text-align: center;">
         @include('components.FEEfooter')
     </footer>
@@ -180,7 +179,7 @@
             });
         });
 
-        // Modal toggle functionality
+        
         document.getElementById('enroll-button').addEventListener('click', function() {
             document.getElementById('enroll-modal').style.display = 'flex';
         });
@@ -189,7 +188,7 @@
             document.getElementById('enroll-modal').style.display = 'none';
         });
 
-        // Close modal when clicking outside the modal content
+        
         document.getElementById('enroll-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 this.style.display = 'none';
