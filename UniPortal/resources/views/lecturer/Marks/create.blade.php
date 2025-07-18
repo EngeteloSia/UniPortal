@@ -51,49 +51,50 @@
     </div>
 
     <script>
-    const courseSelect = document.getElementById('Course-select');
-    const moduleSelect = document.getElementById('module-select');
+const courseSelect = document.getElementById('course-select');
+const moduleSelect = document.getElementById('module-select');
 
-    courseSelect.addEventListener('change', async function() {
-        const courseId = this.value;
+courseSelect.addEventListener('change', async function() {
+    const courseId = this.value;
 
-        if (!courseId) {
-            moduleSelect.innerHTML = '<option value="">-- Select Module --</option>';
-            moduleSelect.disabled = true;
-            return;
-        }
-
-        moduleSelect.innerHTML = '<option>Loading modules...</option>';
+    if (!courseId) {
+        moduleSelect.innerHTML = '<option value="">-- Select Module --</option>';
         moduleSelect.disabled = true;
+        return;
+    }
 
-        try {
-            const response = await fetch(`/courses/${courseId}/modules`, {
-                credentials: 'same-origin',
-                headers: {
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            });
+    moduleSelect.innerHTML = '<option>Loading modules...</option>';
+    moduleSelect.disabled = true;
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+    try {
+        const response = await fetch(`/courses/${courseId}/modules`, {
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
+        });
 
-            const modules = await response.json();
-
-            moduleSelect.innerHTML = '<option value="">-- Select Module --</option>';
-            modules.forEach(module => {
-                const option = document.createElement('option');
-                option.value = module.id;
-                option.textContent = module.title;
-                moduleSelect.appendChild(option);
-            });
-            moduleSelect.disabled = false;
-        } catch (error) {
-            console.error('Error loading modules:', error);
-            moduleSelect.innerHTML = '<option value="">Failed to load modules</option>';
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-    });
+
+        const modules = await response.json();
+
+        moduleSelect.innerHTML = '<option value="">-- Select Module --</option>';
+        modules.forEach(module => {
+            const option = document.createElement('option');
+            option.value = module.id;
+            option.textContent = module.title;
+            moduleSelect.appendChild(option);
+        });
+        moduleSelect.disabled = false;
+    } catch (error) {
+        console.error('Error loading modules:', error);
+        moduleSelect.innerHTML = '<option value="">Failed to load modules</option>';
+    }
+});
 </script>
+
 
 </x-app-layout>

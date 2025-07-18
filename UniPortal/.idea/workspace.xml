@@ -5,22 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="812be0d3-b310-428a-a4a8-7df19ed05500" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/UniPortal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UniPortal.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/StudentDashboardController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EEFadminUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EEFadminUserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EEFdashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EEFdashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EEFemailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EEFemailController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EEFenrollmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EEFenrollmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EEFlecturerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EEFlecturerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EEFlecturerCourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EEFlecturerCourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EEFlecturerDashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EEFlecturerDashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EEFstudentDashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EEFstudentDashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RoleMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RoleMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/EEFtestMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/EEFtestMail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2025_06_21_012445_create_marks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2025_06_21_012445_create_marks_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EEFstudentDashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FEEstudentDashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/FMessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/FMessage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_06_19_193853_create_modules_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2025_06_19_000001_create_modules_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_07_13_123614_add_module_id_to_marks_table.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboards/lecturer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboards/lecturer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboards/student.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboards/student.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -158,6 +150,11 @@
       <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/vendor/dflydev/dot-access-data" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/graphviz" />
+      <path value="$PROJECT_DIR$/vendor/beyondcode/laravel-er-diagram-generator" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -207,7 +204,7 @@
       <option name="presentableId" value="Default" />
       <updated>1752770435940</updated>
       <workItem from="1752770437499" duration="4246000" />
-      <workItem from="1752834364566" duration="652000" />
+      <workItem from="1752834364566" duration="2208000" />
     </task>
     <servers />
   </component>

@@ -5,13 +5,13 @@
         </h2>
     </x-slot>
 
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <div class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-6 lg:p-8">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
 
-           
+
             <nav class="bg-white shadow-2xl rounded-2xl p-6 flex flex-col h-fit lg:h-[calc(100vh-8rem)] animate__animated animate__fadeInLeft">
                 <ul class="space-y-3 flex-grow">
                     <li><a href="#" id="dashboard-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Dashboard</a></li>
@@ -61,7 +61,7 @@
                 <!-- Enroll Students -->
                 <section class="cards-section animate__animated animate__fadeIn" id="students-cards" style="display:none;">
                     <div class="flex items-center mb-6 gap-2">
-                        <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <svg class="w-3 h-3 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m9-5.13a4 4 0 11-8 0 4 4 0 018 0zm6 8v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2a6 6 0 0112 0z" />
                         </svg>
                         <h2 class="text-2xl font-bold text-gray-800">Enroll Student to Course</h2>
@@ -121,9 +121,14 @@
                             </div>
                             @endfor
                     </div>
-                    <button type="submit" class="inline-flex justify-center py-2 px-6 text-white font-semibold rounded-md bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-purple-600 hover:to-indigo-600 transition duration-300">
-                        Create Course
-                    </button>
+                    <button
+  type="submit"
+  class="inline-flex justify-center py-2 px-6 font-semibold rounded-md transition duration-300"
+  style="background-color: #2563eb !important; color: white !important;"
+>
+  Create Course
+</button>
+
                     </form>
         </div>
         </section>
@@ -139,9 +144,9 @@
     </div>
     </div>
     <a href="{{ auth()->user()->role === 'student' ? route('student.email.form') : route('lecturer.email.form') }}"
-   style="color: #1d4ed8; font-weight: 600;">
-   📧 Send Email
-</a>
+        style="color: #1d4ed8; font-weight: 600;">
+        📧 Send Email
+    </a>
 
 
     @include('components.FEEfooter')

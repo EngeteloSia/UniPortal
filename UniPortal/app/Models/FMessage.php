@@ -19,7 +19,7 @@ class FMessage extends Model
         'read_at',
     ];
 
-    
+
 
     public function sender()
     {
