@@ -28,5 +28,9 @@ class Course extends Model
 {
     return $this->hasMany(Mark::class);
 }
+public function enrollmentRequests()
+{
+    return $this->hasMany(CourseEnrollment::class, 'course_id');
+}
 
 }

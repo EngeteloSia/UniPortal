@@ -17,6 +17,8 @@
                     <li><a href="#" id="dashboard-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Dashboard</a></li>
                     <li><a href="#" id="courses-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Manage Courses</a></li>
                     <li><a href="#" id="students-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Enrolled Students</a></li>
+                    <li><a href="#" id="enrollments-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Enrollment Requests</a></li>
+
                     <li><a href="#" id="profile-link" class="block text-blue-600 hover:text-white font-medium py-2 px-3 rounded-md hover:bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300">Profile</a></li>
                     <a href="{{ route('email.form') }}" class="block mb-2 text-blue-700 font-semibold hover:underline">
                         📧 Send Email
@@ -86,12 +88,15 @@
                                 </select>
                             </div>
                             <hr class="my-4 border-blue-100">
-                            <button type="submit" class="w-full flex items-center justify-center gap-2 py-3 px-6 bg-gradient-to-r from-blue-600 to-indigo-500 text-white font-bold rounded-lg shadow-lg hover:from-indigo-600 hover:to-blue-700 transition duration-300 text-lg">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                                </svg>
-                                Enroll Student
-                            </button>
+                            <button
+  type="submit"
+  class="w-full flex items-center justify-center gap-2 py-3 px-6 font-bold rounded-lg shadow-lg transition duration-300 text-lg"
+  style="background-color: #2563eb !important; color: white !important; opacity: 1 !important;">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+  </svg>
+  Enroll Student
+</button>
                         </form>
                     </div>
                 </section>
@@ -122,16 +127,63 @@
                             @endfor
                     </div>
                     <button
-  type="submit"
-  class="inline-flex justify-center py-2 px-6 font-semibold rounded-md transition duration-300"
-  style="background-color: #2563eb !important; color: white !important;"
->
-  Create Course
-</button>
+                        type="submit"
+                        class="inline-flex justify-center py-2 px-6 font-semibold rounded-md transition duration-300"
+                        style="background-color: #2563eb !important; color: white !important;">
+                        Create Course
+                    </button>
 
                     </form>
         </div>
         </section>
+        <section class="cards-section animate__animated animate__fadeIn" id="enrollments-cards" style="display:none;">
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">Pending Enrollment Requests</h2>
+
+            @if($pendingRequests->isEmpty())
+            <p class="text-gray-500">No pending enrollment requests.</p>
+            @else
+            <table class="min-w-full table-auto border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-blue-100">
+                        <th class="border border-gray-300 px-4 py-2">Student</th>
+                        <th class="border border-gray-300 px-4 py-2">Course</th>
+                        <th class="border border-gray-300 px-4 py-2">Requested At</th>
+                        <th class="border border-gray-300 px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($pendingRequests as $request)
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">{{ $request->student->name }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $request->course->title }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $request->created_at->format('d M Y, H:i') }}</td>
+                        <td class="border border-gray-300 px-4 py-2 space-x-2">
+                            <form action="{{ route('lecturer.enrollments.accept', $request->id) }}" method="POST" class="inline">
+                                @csrf
+                                <button
+  type="submit"
+  class="bg-green-500 bg-opacity-100 opacity-100 text-white px-3 py-1 rounded hover:bg-green-600 hover:bg-opacity-100 transition duration-150"
+>
+  Accept✔️
+</button>
+</form>
+<form action="{{ route('lecturer.enrollments.reject', $request->id) }}" method="POST" class="inline">
+  @csrf
+  <button
+    type="submit"
+    class="bg-red-500 bg-opacity-100 opacity-100 text-white px-3 py-1 rounded hover:bg-red-600 hover:bg-opacity-100 transition duration-150"
+  >
+    Reject✖️
+  </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
+        </section>
+
 
         <!-- Profile Section -->
         <section class="cards-section animate__animated animate__fadeIn" id="profile-cards" style="display:none;">
@@ -157,7 +209,8 @@
             'dashboard-link': 'dashboard-cards',
             'courses-link': 'courses-cards',
             'students-link': 'students-cards',
-            'profile-link': 'profile-cards'
+            'profile-link': 'profile-cards',
+            'enrollments-link': 'enrollments-cards' // new line
         };
 
         Object.keys(links).forEach(linkId => {

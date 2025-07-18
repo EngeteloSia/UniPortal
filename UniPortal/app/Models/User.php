@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\CourseEnrollment;
 
 
 class User extends Authenticatable
@@ -47,6 +48,14 @@ class User extends Authenticatable
 {
     return $this->hasMany(\App\Models\Mark::class, 'student_id');
 }
+
+public function enrollmentRequests()
+{
+    return $this->hasMany(CourseEnrollment::class, 'student_id');
+}
+
+
+
 
 
 }

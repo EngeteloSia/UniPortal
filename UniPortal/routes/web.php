@@ -97,5 +97,25 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/student/progress-report', [FEEStudentDashboardController::class, 'progressReport'])->name('student.progress-report');
 });
 
+
+
+Route::middleware(['auth', 'role:student'])->group(function () {
+    Route::post('/courses/{course}/enroll', [EEFenrollmentController::class, 'enroll'])->name('courses.enroll');
+});
+
+Route::middleware(['auth', 'role:lecturer'])->group(function () {
+    Route::get('/lecturer/enrollments/pending', [EEFenrollmentController::class, 'pendingEnrollments'])->name('lecturer.enrollments.pending');
+    Route::post('/lecturer/enrollments/{id}/accept', [EEFenrollmentController::class, 'acceptEnrollment'])->name('lecturer.enrollments.accept');
+    Route::post('/lecturer/enrollments/{id}/reject', [EEfenrollmentController::class, 'rejectEnrollment'])->name('lecturer.enrollments.reject');
+});
+
+Route::middleware(['auth', 'role:lecturer'])->group(function () {
+    Route::get('/lecturer/enrollments', [App\Http\Controllers\EEFlecturerController::class, 'enrollmentRequests'])->name('lecturer.enrollments');
+});
+Route::middleware(['auth', 'role:lecturer'])->group(function () {
+    Route::patch('/lecturer/enrollments/{id}', [App\Http\Controllers\EEFlecturerController::class, 'updateEnrollmentStatus'])->name('lecturer.enrollments.update');
+});
+
+
 // Auth routes from Laravel Breeze / Jetstream etc.
 require __DIR__ . '/auth.php';
